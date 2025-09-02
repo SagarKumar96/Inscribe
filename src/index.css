@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* DaisyUI theme can be customized later */
+
+@plugin "daisyui";
+
+

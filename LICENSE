@@ -1,0 +1,45 @@
+Inscribe Community License 1.0
+
+Copyright (c) 2025 reschjonas
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to use,
+copy, modify, merge, publish, and contribute to the Software, subject to the
+following conditions:
+
+1) Attribution
+   You must retain the above copyright notice and this license in source
+   distributions. If you redistribute binaries or substantial derivatives,
+   you must provide reasonable attribution in documentation or the user
+   interface (e.g., an About dialog or README) including:
+   - The original project name: "Inscribe"
+   - A link to the original repository: https://github.com/reschjonas/Inscribe
+   - The original author name: "reschjonas"
+
+2) No Misrepresentation / Naming
+   You must not misrepresent the origin of the Software. Modified versions
+   must be clearly marked as changed and may not be presented as the original.
+   Without prior written permission, you may not use the name "Inscribe",
+   or confusingly similar branding, as the primary product name for a fork
+   or derivative work, nor imply endorsement by or association with the
+   original author.
+
+3) Notice of Changes
+   If you modify the Software and distribute it, you must document the
+   significant changes you made (e.g., in a CHANGELOG, release notes, or
+   README), and the date of those changes.
+
+4) Trademarks
+   This license does not grant rights to use the original project's names,
+   logos, or trademarks except as required for attribution, unless you obtain
+   explicit permission.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+
