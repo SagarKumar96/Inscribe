@@ -97,6 +97,9 @@ export default function Home() {
   const [afterAction, setAfterAction] = useState<string>(typeof window !== "undefined" ? (localStorage.getItem("ds:afterAction") ?? "none") : "none");
   const afterActionRef = useRef<string>(typeof window !== "undefined" ? (localStorage.getItem("ds:afterAction") ?? "none") : "none");
   const [downloadDir, setDownloadDir] = useState<string>(typeof window !== "undefined" ? (localStorage.getItem("ds:dlDir") ?? "") : "");
+  const [deps, setDeps] = useState<Array<{ package: string; tool: string; installed: boolean }> | null>(null);
+  const [depsChecking, setDepsChecking] = useState(false);
+  const [depsInstalling, setDepsInstalling] = useState(false);
 
   function applyThemeChoice(choice: string) {
     const root = document.documentElement;
@@ -299,6 +302,35 @@ export default function Home() {
       if (next.has(path)) next.delete(path); else next.add(path);
       return next;
     });
+  }
+
+  async function checkDeps() {
+    try {
+      setDepsChecking(true);
+      const res = await invoke<{ deps: Array<{ package: string; tool: string; installed: boolean }> }>("check_runtime_deps");
+      setDeps(res.deps);
+      const missing = (res.deps || []).filter((d) => !d.installed).length;
+      if (missing === 0) pushToast("success", "All dependencies present");
+      else pushToast("info", `${missing} dependency${missing === 1 ? "" : "ies"} missing`);
+    } catch (e: unknown) {
+      pushToast("error", getErrorMessage(e));
+    } finally {
+      setDepsChecking(false);
+    }
+  }
+
+  async function installDeps() {
+    try {
+      setDepsInstalling(true);
+      pushToast("info", "Requesting to install required packages (will prompt)...");
+      await invoke("install_runtime_deps");
+      pushToast("success", "Dependencies installed");
+      await checkDeps();
+    } catch (e: unknown) {
+      pushToast("error", getErrorMessage(e));
+    } finally {
+      setDepsInstalling(false);
+    }
   }
 
   const presets: Array<{ label: string; url?: string; dynamic?: "kali-latest" }> = [
@@ -948,8 +980,23 @@ export default function Home() {
                         try { const changed = await invoke<boolean>("ensure_setup"); pushToast("success", changed ? "Setup updated" : "Setup already OK"); }
                         catch (e: unknown) { pushToast("error", getErrorMessage(e)); }
                       }}>Re-run setup</button>
+                      <button className="rounded-md px-3 py-2 text-sm border border-border hover:bg-surface-muted" onClick={checkDeps} disabled={depsChecking}>{depsChecking ? "Checking deps..." : "Check dependencies"}</button>
+                      <button className="rounded-md px-3 py-2 text-sm border border-border hover:bg-surface-muted" onClick={installDeps} disabled={depsInstalling}>{depsInstalling ? "Installing..." : "Install missing"}</button>
                     </div>
-                    <div className="text-xs opacity-70">Uses a helper with sudoers and polkit. Admin rights required once.</div>
+                    {deps && (
+                      <div className="mt-2 rounded-md border border-border p-2">
+                        <div className="text-xs font-medium mb-1">Runtime dependencies</div>
+                        <ul className="text-xs space-y-0.5">
+                          {deps.map((d, i) => (
+                            <li key={i} className="flex justify-between">
+                              <span>{d.package} ({d.tool})</span>
+                              <span className={d.installed ? "text-emerald-600" : "text-red-600"}>{d.installed ? "installed" : "missing"}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                    <div className="text-xs opacity-70">Uses a helper with sudoers and polkit. Admin rights required once. On some systems you may need additional runtime packages; use the checker above.</div>
                   </div>
                   <div className="text-xs opacity-70">Tip: You can change theme in your OS appearance settings.</div>
                 </motion.div>

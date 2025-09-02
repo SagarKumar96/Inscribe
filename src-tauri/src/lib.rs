@@ -793,9 +793,67 @@ fn relaunch_appimage() -> Result<(), String> {
     }
 }
 
+#[tauri::command]
+fn check_runtime_deps() -> Result<serde_json::Value, String> {
+    #[cfg(target_os = "linux")]
+    {
+        let deps = vec![
+            ("libwebkit2gtk-4.1-0", "webkit2gtk"),
+            ("libjavascriptcoregtk-4.1-0", "jsc"),
+            ("libgtk-3-0", "gtk3"),
+            ("libsoup-3.0-0", "libsoup3"),
+            ("libayatana-appindicator3-1", "appindicator"),
+            ("policykit-1", "pkexec"),
+            ("udisks2", "udisks2"),
+            ("gdisk", "sgdisk"),
+            ("dosfstools", "mkfs.vfat"),
+            ("exfatprogs", "mkfs.exfat"),
+            ("ntfs-3g", "mkfs.ntfs"),
+        ];
+        let mut items = Vec::new();
+        for (pkg, tool) in deps {
+            let has_pkg = Command::new("sh").args(["-c", &format!("dpkg -s {} >/dev/null 2>&1", pkg)])
+                .status().map(|s| s.success()).unwrap_or(false);
+            let has_tool = Command::new("sh").args(["-c", &format!("command -v {} >/dev/null 2>&1", tool)])
+                .status().map(|s| s.success()).unwrap_or(false);
+            items.push(serde_json::json!({"package": pkg, "tool": tool, "installed": has_pkg || has_tool}));
+        }
+        Ok(serde_json::json!({"deps": items}))
+    }
+    #[cfg(not(target_os = "linux"))]
+    { Ok(serde_json::json!({"deps": []})) }
+}
+
+#[tauri::command]
+fn install_runtime_deps() -> Result<(), String> {
+    #[cfg(target_os = "linux")]
+    {
+        let install_script = r#"set -eu
+export DEBIAN_FRONTEND=noninteractive
+apt-get update -y
+apt-get install -y --no-install-recommends \
+  libwebkit2gtk-4.1-0 libjavascriptcoregtk-4.1-0 libgtk-3-0 \
+  libsoup-3.0-0 libayatana-appindicator3-1 policykit-1 udisks2 \
+  gdisk dosfstools exfatprogs ntfs-3g
+"#;
+        let status = Command::new("pkexec")
+            .arg("/bin/sh").arg("-c").arg(install_script)
+            .status().map_err(|e| format!("pkexec apt install: {}", e))?;
+        if !status.success() { return Err(format!("apt install exited with status: {:?}", status.code())); }
+        Ok(())
+    }
+    #[cfg(not(target_os = "linux"))]
+    { Ok(()) }
+}
+
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     eprintln!("[Inscribe] Tauri run(): starting app ...");
+    // Try to mitigate grey window on systems with nouveau/WebKit issues
+    // Prefer software GL and disable WebKit GPU acceleration if settable via env
+    std::env::set_var("WEBKIT_DISABLE_COMPOSITING_MODE", "1");
+    std::env::set_var("WEBKIT_DISABLE_DMABUF_RENDERER", "1");
+    std::env::set_var("LIBGL_ALWAYS_SOFTWARE", "1");
     tauri::Builder::default()
         .plugin(tauri_plugin_dialog::init())
         .plugin(tauri_plugin_opener::init())
@@ -818,6 +876,8 @@ pub fn run() {
             validate_flash_sample,
             github_update_self,
             relaunch_appimage,
+            check_runtime_deps,
+            install_runtime_deps,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
